@@ -1,15 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Compile') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'echo "Building in Unix"'
-                    } else {
-                        powershell 'echo "Building in Windows"'
-                    }
-                }
+                echo 'Compiling Java file...'
+                sh 'javac MyProgram.java'
+            }
+        }
+        stage('Run Java Program') {
+            steps {
+                echo 'Running Java program...'
+                sh 'java MyProgram'
             }
         }
     }

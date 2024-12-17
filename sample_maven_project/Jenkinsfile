@@ -3,14 +3,16 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
-                echo 'Compiling Java file...'
-                sh 'javac sample_repository/sample_maven_project/src/test/java/sample_package/SampleClass.java'
+                echo 'Compiling Java project using Maven...'
+                // Running Maven clean and install to compile the project
+                sh 'mvn clean install -f sample_repository/sample_maven_project/pom.xml'
             }
         }
         stage('Run Java Program') {
             steps {
-                echo 'Running Java program...'
-                sh 'java sample_repository/sample_maven_project/src/test/java/sample_package/SampleClass'
+                echo 'Running Java program with Maven...'
+                // Run tests or main class using Maven
+                sh 'mvn exec:java -f sample_repository/sample_maven_project/pom.xml -Dexec.mainClass="sample_package.SampleClass"'
             }
         }
     }

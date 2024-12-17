@@ -1,24 +1,15 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout Code') {
+        stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/herit6-hanu/sample_repository.git'
-            }
-        }
-
-        stage('Build & Test') {
-            steps {
-                echo 'Building and running tests...'
-                sh 'mvn clean test'
-            }
-        }
-
-        stage('Post Build') {
-            steps {
-                echo 'Archiving test results...'
-                junit '**/target/surefire-reports/*.xml'
+                script {
+                    if (isUnix()) {
+                        sh 'echo "Building in Unix"'
+                    } else {
+                        powershell 'echo "Building in Windows"'
+                    }
+                }
             }
         }
     }

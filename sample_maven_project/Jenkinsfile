@@ -4,13 +4,13 @@ pipeline {
         stage('Compile') {
             steps {
                 echo 'Compiling Java file...'
-                sh 'javac sample_maven_project/src/test/java/sample_package/SampleClass.java'
+                sh 'javac sample_repository/sample_maven_project/src/test/java/sample_package/SampleClass.java'
             }
         }
         stage('Run Java Program') {
             steps {
                 echo 'Running Java program...'
-                sh 'java sample_maven_project/src/test/java/sample_package/SampleClass'
+                sh 'java sample_repository/sample_maven_project/src/test/java/sample_package/SampleClass'
             }
         }
     }
